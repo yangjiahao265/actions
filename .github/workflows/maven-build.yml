@@ -16,7 +16,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: ./mvnw --batch-mode --update-snapshots --settings .settings.xml clean package
+        run: |
+          echo $DEVCLOUD_USERNAME
+          echo $DEVCLOUD_TOKEN
+          ./mvnw --batch-mode --update-snapshots --settings .settings.xml clean package
         env:
           DEVCLOUD_USERNAME: ${{ secrets.DEVCLOUD_USERNAME }}
           DEVCLOUD_TOKEN: ${{ secrets.DEVCLOUD_TOKEN }}
