@@ -2,6 +2,13 @@ name: Java CI with Maven
 
 on:
   workflow_call:
+    inputs:
+      DEVCLOUD_USERNAME:
+        required: true
+        type: string
+    secrets:
+      DEVCLOUD_TOKEN:
+        required: true
 
 jobs:
   build:
@@ -21,5 +28,5 @@ jobs:
           echo $DEVCLOUD_TOKEN
           ./mvnw --batch-mode --update-snapshots --settings .settings.xml clean package
         env:
-          DEVCLOUD_USERNAME: ${{ secrets.DEVCLOUD_USERNAME }}
+          DEVCLOUD_USERNAME: ${{ inputs.DEVCLOUD_USERNAME }}
           DEVCLOUD_TOKEN: ${{ secrets.DEVCLOUD_TOKEN }}
